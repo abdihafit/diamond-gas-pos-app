@@ -9,7 +9,7 @@ import { useToast } from "@/hooks/use-toast";
 import { Flame } from "lucide-react";
 
 export default function Login() {
-  const { user, role, loading, signIn } = useAuth();
+  const { user, role, loading, signIn, signOut } = useAuth();
   const { toast } = useToast();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
