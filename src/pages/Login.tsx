@@ -31,7 +31,7 @@ export default function Login() {
         <Card className="w-full max-w-sm">
           <CardContent className="pt-6 text-center">
             <p className="text-muted-foreground">Your account has no role assigned yet. Please contact the admin.</p>
-            <Button variant="outline" className="mt-4" onClick={() => { const { signOut } = useAuth(); signOut(); }}>
+            <Button variant="outline" className="mt-4" onClick={() => signOut()}>
               Sign Out
             </Button>
           </CardContent>
