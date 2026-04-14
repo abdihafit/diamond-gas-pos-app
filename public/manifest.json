@@ -1,0 +1,18 @@
+{
+  "name": "Diamond Gas POS",
+  "short_name": "Diamond POS",
+  "description": "Sales entry and admin dashboard for Diamond Gas POS.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#f8fafc",
+  "background_color": "#f8fafc",
+  "icons": [
+    {
+      "src": "/diamond-gas-logo.png",
+      "sizes": "768x432",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

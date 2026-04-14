@@ -1,68 +1,9 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-@layer base {
-  :root {
-    --background: 210 20% 98%;
-    --foreground: 215 25% 15%;
-
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 15%;
-
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 15%;
-
-    --primary: 215 40% 16%;
-    --primary-foreground: 45 60% 96%;
-
-    --secondary: 210 20% 94%;
-    --secondary-foreground: 215 25% 15%;
-
-    --muted: 210 15% 94%;
-    --muted-foreground: 215 10% 45%;
-
-    --accent: 42 65% 55%;
-    --accent-foreground: 215 40% 16%;
-
-    --destructive: 0 72% 51%;
-    --destructive-foreground: 0 0% 100%;
-
-    --border: 214 20% 88%;
-    --input: 214 20% 88%;
-    --ring: 42 65% 55%;
-
-    --radius: 0.5rem;
-
-    --success: 142 71% 45%;
-    --success-foreground: 0 0% 100%;
-
-    --sidebar-background: 215 40% 16%;
-    --sidebar-foreground: 210 20% 90%;
-    --sidebar-primary: 42 65% 55%;
-    --sidebar-primary-foreground: 215 40% 16%;
-    --sidebar-accent: 215 35% 22%;
-    --sidebar-accent-foreground: 210 20% 90%;
-    --sidebar-border: 215 30% 25%;
-    --sidebar-ring: 42 65% 55%;
-  }
+:root {
+  color-scheme: light;
 }
 
-@layer base {
-  * {
-    @apply border-border;
-  }
-
-  body {
-    @apply bg-background text-foreground font-sans antialiased;
-    font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  }
-}
-
-@layer utilities {
-  .glass-card {
-    @apply bg-card/80 backdrop-blur-sm border border-border/50 shadow-sm;
-  }
+body {
+  font-family: "IBM Plex Sans", "Segoe UI", system-ui, -apple-system, sans-serif;
 }
