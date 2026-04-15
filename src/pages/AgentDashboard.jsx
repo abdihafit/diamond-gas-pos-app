@@ -87,7 +87,8 @@ export default function AgentDashboard() {
 
   const kgValue = Number(form.kg) || 0
   const rateValue = Number(form.rate) || 0
-  const buyingValue = Number(form.buyingPrice) || 0
+  const buyRateValue = Number(form.buyingPrice) || 0
+  const buyAmountValue = useMemo(() => kgValue * buyRateValue, [kgValue, buyRateValue])
   const amountValue = useMemo(() => kgValue * rateValue, [kgValue, rateValue])
 
   useEffect(() => {
@@ -164,7 +165,7 @@ export default function AgentDashboard() {
           kg: kgValue,
           rate: rateValue,
           amount: amountValue,
-          buyingPrice: buyingValue,
+          buyingPrice: buyAmountValue,
           createdBy: user.uid,
           createdAt,
         }
@@ -183,7 +184,7 @@ export default function AgentDashboard() {
         setStatus('idle')
       }
     },
-    [amountValue, buyingValue, editingId, form.customerName, form.saleDate, kgValue, rateValue, resetForm]
+    [amountValue, buyAmountValue, editingId, form.customerName, form.saleDate, kgValue, rateValue, resetForm]
   )
 
   const handleEdit = useCallback((sale) => {
@@ -192,7 +193,7 @@ export default function AgentDashboard() {
       customerName: sale.customerName ?? '',
       kg: sale.kg ?? '',
       rate: sale.rate ?? '',
-      buyingPrice: sale.buyingPrice ?? '',
+      buyingPrice: sale.buyingPrice && sale.kg ? (sale.buyingPrice / sale.kg).toString() : '',
       saleDate: toInputDate(sale.createdAt),
     })
   }, [])
@@ -263,7 +264,7 @@ export default function AgentDashboard() {
                 />
               </label>
               <label className="text-sm font-medium text-slate-600">
-                Buying Price
+                Buying Rate (/KG)
                 <input
                   type="number"
                   min="0"
@@ -271,6 +272,15 @@ export default function AgentDashboard() {
                   value={form.buyingPrice}
                   onChange={updateField('buyingPrice')}
                   className="mt-2 w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-2 text-sm focus:border-slate-400 focus:outline-none"
+                />
+              </label>
+              <label className="text-sm font-medium text-slate-600">
+                Total Buy
+                <input
+                  type="text"
+                  value={formatNumber(buyAmountValue)}
+                  readOnly
+                  className="mt-2 w-full rounded-md border border-slate-200 bg-slate-100 px-3 py-2 text-sm text-slate-500"
                 />
               </label>
               <label className="text-sm font-medium text-slate-600">
@@ -344,7 +354,7 @@ export default function AgentDashboard() {
                   <th className="border-b border-slate-200 px-4 py-3">Customer</th>
                   <th className="border-b border-slate-200 px-4 py-3">KG</th>
                   <th className="border-b border-slate-200 px-4 py-3">Rate</th>
-                  <th className="border-b border-slate-200 px-4 py-3">Buying Price</th>
+                  <th className="border-b border-slate-200 px-4 py-3">Buy Total</th>
                   <th className="border-b border-slate-200 px-4 py-3">Amount</th>
                   <th className="border-b border-slate-200 px-4 py-3">Payment</th>
                   <th className="border-b border-slate-200 px-4 py-3">Status</th>

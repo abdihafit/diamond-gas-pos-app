@@ -465,7 +465,7 @@ export default function AdminDashboard() {
                   <th className="border-b border-slate-200 px-4 py-3">Customer</th>
                   <th className="border-b border-slate-200 px-4 py-3">KG</th>
                   <th className="border-b border-slate-200 px-4 py-3">Rate</th>
-                  <th className="border-b border-slate-200 px-4 py-3">Buying Price</th>
+                  <th className="border-b border-slate-200 px-4 py-3">Buy Total</th>
                   <th className="border-b border-slate-200 px-4 py-3">Amount</th>
                   <th className="border-b border-slate-200 px-4 py-3">Profit</th>
                   <th className="border-b border-slate-200 px-4 py-3">Status</th>
