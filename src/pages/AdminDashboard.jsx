@@ -28,9 +28,10 @@ const toAmount = (sale) => {
 }
 
 const toProfit = (sale) => {
-  const amount = toAmount(sale)
-  const buying = Number(sale.buyingPrice) || 0
-  return amount - buying
+  const kg = Number(sale.kg) || 0
+  const rate = Number(sale.rate) || 0
+  const buyPerKg = Number(sale.buyingPrice) || 0
+  return kg * (rate - buyPerKg)
 }
 
 const calcTotals = (sales) => {
@@ -66,7 +67,7 @@ const calcTotals = (sales) => {
   )
 }
 
-const SaleRow = memo(function SaleRow({ sale, isUpdating, isUpdated, onMarkPaid, onDelete }) {
+const SaleRow = memo(function SaleRow({ sale, isUpdating, isUpdated, onMarkPaid, onMarkUnpaid, onDelete }) {
   return (
     <tr className={`odd:bg-white even:bg-slate-50 ${isUpdated ? 'bg-emerald-50' : ''}`}>
       <td className="border-b border-slate-100 px-4 py-3 font-medium text-slate-800">
@@ -79,7 +80,7 @@ const SaleRow = memo(function SaleRow({ sale, isUpdating, isUpdated, onMarkPaid,
         {formatNumber(Number(sale.rate))}
       </td>
       <td className="border-b border-slate-100 px-4 py-3">
-        {formatNumber(Number(sale.buyingPrice ?? 0))}
+        {formatNumber(Number(sale.buyingPrice ?? 0))} (per KG)
       </td>
       <td className="border-b border-slate-100 px-4 py-3 font-semibold text-slate-800">
         {formatNumber(toAmount(sale))}
@@ -112,6 +113,16 @@ const SaleRow = memo(function SaleRow({ sale, isUpdating, isUpdated, onMarkPaid,
                 ? 'Updating...'
                 : 'Mark Paid'}
           </button>
+          {(sale.paymentStatus ?? 'pending') === 'paid' && (
+            <button
+              type="button"
+              disabled={isUpdating}
+              onClick={() => onMarkUnpaid(sale.id)}
+              className="rounded-md border border-amber-200 px-3 py-1 text-xs font-semibold text-amber-700 transition hover:border-amber-300 hover:text-amber-800 disabled:cursor-not-allowed disabled:border-amber-200 disabled:text-amber-400"
+            >
+              {isUpdating ? 'Updating...' : 'Mark Unpaid'}
+            </button>
+          )}
           <button
             type="button"
             onClick={() => onDelete(sale.id, sale.customerName)}
@@ -233,6 +244,21 @@ export default function AdminDashboard() {
     setBusyId(saleId)
     try {
       await updateSale(saleId, { paymentStatus: 'paid' })
+      setUpdatedId(saleId)
+      setTimeout(() => {
+        setUpdatedId((current) => (current === saleId ? null : current))
+      }, 1400)
+    } catch (err) {
+      setError(err.message)
+    } finally {
+      setBusyId(null)
+    }
+  }, [])
+
+  const markUnpaid = useCallback(async (saleId) => {
+    setBusyId(saleId)
+    try {
+      await updateSale(saleId, { paymentStatus: 'pending' })
       setUpdatedId(saleId)
       setTimeout(() => {
         setUpdatedId((current) => (current === saleId ? null : current))
@@ -465,7 +491,9 @@ export default function AdminDashboard() {
                   <th className="border-b border-slate-200 px-4 py-3">Customer</th>
                   <th className="border-b border-slate-200 px-4 py-3">KG</th>
                   <th className="border-b border-slate-200 px-4 py-3">Rate</th>
-                  <th className="border-b border-slate-200 px-4 py-3">Buy Total</th>
+
+                  <th className="border-b border-slate-200 px-4 py-3">Buy Rate (KSh/KG)</th>
+
                   <th className="border-b border-slate-200 px-4 py-3">Amount</th>
                   <th className="border-b border-slate-200 px-4 py-3">Profit</th>
                   <th className="border-b border-slate-200 px-4 py-3">Status</th>
@@ -491,8 +519,10 @@ export default function AdminDashboard() {
                       isUpdating={busyId === sale.id}
                       isUpdated={updatedId === sale.id}
                       onMarkPaid={markPaid}
+                      onMarkUnpaid={markUnpaid}
                       onDelete={handleDelete}
                     />
+
                   ))
                 )}
               </tbody>
