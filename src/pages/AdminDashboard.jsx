@@ -8,16 +8,7 @@ import {
 import { db } from '../firebase/firebase'
 import { signOutUser } from '../firebase/auth'
 import { deleteSale, updateSale } from '../firebase/db'
-
-const formatNumber = (value) =>
-  Number.isFinite(value)
-    ? value.toLocaleString('en-KE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : '--'
-
-const formatDate = (timestamp) => {
-  if (!timestamp?.toDate) return '--'
-  return timestamp.toDate().toLocaleDateString()
-}
+import { formatDate, formatNumber } from '../lib/formatters'
 
 const toAmount = (sale) => {
   const amount = Number(sale.amount)
