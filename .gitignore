@@ -25,3 +25,4 @@ dist-ssr
 *.sw?
 
 .vercel
+_local-snapshot-backup/
