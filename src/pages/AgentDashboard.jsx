@@ -11,6 +11,7 @@ import { auth, db } from '../firebase/firebase'
 import { signOutUser } from '../firebase/auth'
 import { createSale, updateSale } from '../firebase/db'
 import PaymentStatusBadge from '../components/PaymentStatusBadge'
+import TableEmptyState from '../components/TableEmptyState'
 import { formatDateTime, formatNumber } from '../lib/formatters'
 
 const defaultForm = {
@@ -356,14 +357,7 @@ export default function AgentDashboard() {
               </thead>
               <tbody>
                 {sales.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan="9"
-                      className="px-4 py-6 text-center text-sm text-slate-400"
-                    >
-                      No sales yet. Add your first entry above.
-                    </td>
-                  </tr>
+                  <TableEmptyState colSpan={9} message="No sales yet. Add your first entry above." />
                 ) : (
                   sales.map((sale) => <SaleRow key={sale.id} sale={sale} onEdit={handleEdit} />)
                 )}
