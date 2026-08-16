@@ -1,15 +1,13 @@
-# Diamond Gas POS - Admin Unpaid Revert Feature
+# Diamond Gas POS TODO
 
-## Completed Steps:
-- [x] Step 1: Add markUnpaid handler in AdminDashboard.jsx
-- [x] Step 2: Pass onMarkUnpaid prop to SaleRow components
-- [x] Step 3: Update SaleRow action buttons - add conditional "Mark Unpaid" button
+## Current Follow-Ups
 
-## Pending Steps:
-- [ ] Step 4: Test functionality (mark paid → unpaid → verify status revert)
-- [x] Step 5: Mark complete and cleanup TODO.md
+- [ ] Verify the admin "Mark Unpaid" flow against live Firestore data
+- [ ] Restore local dependency installation for build and test commands
+- [ ] Add a few focused tests around sales calculations and auth roles
 
-**Status:** Frontend implementation complete. Test the feature. Run `npm run dev` if needed to see live changes. Once tested, inform me to cleanup TODO.md.
+## Near-Term Improvements
 
-All changes in src/pages/AdminDashboard.jsx
-
+- [ ] Extract shared formatting helpers from dashboard pages
+- [ ] Improve empty states and inline validation messaging
+- [ ] Document deployment and operations expectations more fully
