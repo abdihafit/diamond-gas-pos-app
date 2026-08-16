@@ -44,3 +44,11 @@ Diamond Gas POS is a lightweight React and Firebase point-of-sale app for record
 ## Project Status
 
 The repository is actively evolving from a simple internal tool into a better-documented, easier-to-maintain production app.
+
+## Additional Docs
+
+- [Architecture overview](docs/architecture.md)
+- [Data model](docs/data-model.md)
+- [Roles and workflows](docs/roles-and-workflows.md)
+- [Deployment notes](docs/deployment.md)
+- [Troubleshooting guide](docs/troubleshooting.md)
