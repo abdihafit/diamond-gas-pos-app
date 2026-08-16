@@ -10,6 +10,7 @@ import {
 import { auth, db } from '../firebase/firebase'
 import { signOutUser } from '../firebase/auth'
 import { createSale, updateSale } from '../firebase/db'
+import PaymentStatusBadge from '../components/PaymentStatusBadge'
 import { formatDateTime, formatNumber } from '../lib/formatters'
 
 const defaultForm = {
@@ -50,8 +51,8 @@ const SaleRow = memo(function SaleRow({ sale, onEdit }) {
       <td className="border-b border-slate-100 px-4 py-3">
         {sale.paymentMethod ?? 'DTB'}
       </td>
-      <td className="border-b border-slate-100 px-4 py-3 capitalize text-slate-600">
-        {sale.paymentStatus ?? 'pending'}
+      <td className="border-b border-slate-100 px-4 py-3 text-slate-600">
+        <PaymentStatusBadge status={sale.paymentStatus} />
       </td>
       <td className="border-b border-slate-100 px-4 py-3 text-xs text-slate-400">
         {formatDateTime(sale.createdAt)}
