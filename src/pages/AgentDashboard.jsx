@@ -10,6 +10,7 @@ import {
 import { auth, db } from '../firebase/firebase'
 import { signOutUser } from '../firebase/auth'
 import { createSale, updateSale } from '../firebase/db'
+import { formatDateTime, formatNumber } from '../lib/formatters'
 
 const defaultForm = {
   customerName: '',
@@ -17,16 +18,6 @@ const defaultForm = {
   rate: '',
   buyingPrice: '',
   saleDate: '',
-}
-
-const formatNumber = (value) =>
-  Number.isFinite(value)
-    ? value.toLocaleString('en-KE', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
-    : '--'
-
-const formatDateTime = (timestamp) => {
-  if (!timestamp?.toDate) return '--'
-  return timestamp.toDate().toLocaleString()
 }
 
 const toInputDate = (timestamp) => {
