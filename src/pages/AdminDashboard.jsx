@@ -8,6 +8,7 @@ import {
 import { db } from '../firebase/firebase'
 import { signOutUser } from '../firebase/auth'
 import { deleteSale, updateSale } from '../firebase/db'
+import PaymentStatusBadge from '../components/PaymentStatusBadge'
 import { formatDate, formatNumber } from '../lib/formatters'
 
 const toAmount = (sale) => {
@@ -79,8 +80,8 @@ const SaleRow = memo(function SaleRow({ sale, isUpdating, isUpdated, onMarkPaid,
       <td className="border-b border-slate-100 px-4 py-3 font-semibold text-emerald-700">
         {formatNumber(toProfit(sale))}
       </td>
-      <td className="border-b border-slate-100 px-4 py-3 capitalize text-slate-600">
-        {sale.paymentStatus ?? 'pending'}
+      <td className="border-b border-slate-100 px-4 py-3 text-slate-600">
+        <PaymentStatusBadge status={sale.paymentStatus} />
         {isUpdated ? (
           <span className="ml-2 rounded-full bg-emerald-100 px-2 py-0.5 text-[10px] font-semibold uppercase text-emerald-700">
             Updated
