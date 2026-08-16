@@ -24,6 +24,23 @@ Diamond Gas POS is a lightweight React and Firebase point-of-sale app for record
 - Cloud Firestore
 - Tailwind CSS 4
 
+## Local Setup
+
+1. Install dependencies with `npm install`.
+2. Copy `.env.example` to `.env`.
+3. Fill in the Firebase web app credentials.
+4. Start the app with `npm run dev`.
+5. Build production assets with `npm run build`.
+
+## Required Environment Variables
+
+- `VITE_FIREBASE_API_KEY`
+- `VITE_FIREBASE_AUTH_DOMAIN`
+- `VITE_FIREBASE_PROJECT_ID`
+- `VITE_FIREBASE_STORAGE_BUCKET`
+- `VITE_FIREBASE_MESSAGING_SENDER_ID`
+- `VITE_FIREBASE_APP_ID`
+
 ## Project Status
 
 The repository is actively evolving from a simple internal tool into a better-documented, easier-to-maintain production app.
