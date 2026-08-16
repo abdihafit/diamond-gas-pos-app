@@ -9,6 +9,7 @@ import { db } from '../firebase/firebase'
 import { signOutUser } from '../firebase/auth'
 import { deleteSale, updateSale } from '../firebase/db'
 import PaymentStatusBadge from '../components/PaymentStatusBadge'
+import TableEmptyState from '../components/TableEmptyState'
 import { formatDate, formatNumber } from '../lib/formatters'
 
 const toAmount = (sale) => {
@@ -495,14 +496,7 @@ export default function AdminDashboard() {
               </thead>
               <tbody>
                 {filteredSales.length === 0 ? (
-                  <tr>
-                    <td
-                      colSpan="9"
-                      className="px-4 py-6 text-center text-sm text-slate-400"
-                    >
-                      No sales found for the selected dates.
-                    </td>
-                  </tr>
+                  <TableEmptyState colSpan={9} message="No sales found for the selected dates." />
                 ) : (
                   filteredSales.map((sale) => (
                     <SaleRow
